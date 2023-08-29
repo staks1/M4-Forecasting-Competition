@@ -4,7 +4,7 @@
 Created on Sun Aug 27 12:57:25 2023
 Based on the script "predict.py" from btrotta
 Please check her repo : 
-https://github.com/btrotta/m4/blob/master/utilities.py
+https://github.com/btrotta/m4/blob/master/predict.py
 
 """
 """Script to make predictions by loading trained models."""
