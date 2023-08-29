@@ -144,13 +144,18 @@ def plotCompare(R):
     plt.xticks(rotation = 90)
     plt.xlabel("Time Steps : History + Horizon",weight = 'bold',size = 12)
     plt.ylabel("Time Series Observations",weight= 'bold',size = 12)
+    
+    # history values before horizon 
     plt.plot(x_history, 'o-',color='blue',label = 'History ')
     # prediction of our model 
     plt.plot(model_final_1.iloc[-horizon:], color='green', label='Our Model Predictions')
     # prediction of the author's models 
-    plt.plot(model_final_2.iloc[-horizon:], color='red', label='Original Model Predictions')
+    plt.plot(model_final_2.iloc[-horizon:], color='red', label="Author's Model Predictions")
     #plot the true values 
-    plt.plot(model_final_3[-horizon:],color='skyblue', label='Model Y4 Predictions')
+    plt.plot(model_final_3[-horizon:],color='skyblue', label='True Horizon Values')
+    
+    # add legend
+    plt.legend()
     
     
     
