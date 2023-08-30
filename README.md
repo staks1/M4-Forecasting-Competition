@@ -2,7 +2,7 @@
 
 # Convolutional Models for M4 time series forecasting
 
-# About the Project
+## About the Project
 This project is based on the M4 Time Series Forecasting Competition 'btrotta' entry. In particular I trained and run her convolutional neural networks using her instructions in her repo : (https://github.com/btrotta/m4).
 
 
@@ -46,5 +46,8 @@ To download the data you can visit (https://github.com/Mcompetitions/M4-methods/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# Improving the Models
-I experimented with the architecture of the convolutional models created and their parameters and i tried to improve the models for each frequency . Some functions used are taken from the original (https://github.com/btrotta/m4) and others were added. In parrticular besided the new models, functions to observe the training loss and visualize the final predictions are implemented, whereas the final predictions are located in the 'predictions' directory and are split according to frequency.
+# Experimentation/Improving the Models
+I experimented with the architecture of the convolutional models created and their parameters and i tried to improve the models for each frequency . Some functions used are taken from the original (https://github.com/btrotta/m4) and others were added. In particular besided the new models, functions to observe the training loss and visualize the final predictions are implemented, whereas the final predictions are located in the 'predictions' directory and are split according to frequency.
+
+## Models
+If you want to take a look at the models or make modifications and update them see `build_models.py` where each model for each frequency is created. Additionally you can change model parameters like series_length, yearly_count, filter_count, units_count, epochs, bs from the `train_models.py` in the `utils` module, in the line where each model is constructed.
