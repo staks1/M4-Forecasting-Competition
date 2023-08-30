@@ -5,7 +5,7 @@ Created on Sun Aug 27 20:49:22 2023
 
 @author: st_ko
 """
-
+import glob
 import keras as ks
 import pandas as pd
 import numpy as np
@@ -53,6 +53,7 @@ def mapName(df,freq_name):
 
 def plotCompare(R):
     # read the original model's predictions for series 1 
+    # TODO: customize with glob to just read the csv file without the name (only fc pattern)
     y_orig = pd.read_csv(os.path.join('original_trained_models/results', 'Submission_fc_230825_1339.csv'), header=0, index_col=0)
     
     if(R == 'D'):
@@ -60,7 +61,12 @@ def plotCompare(R):
         horizon = 14
         y_orig_freq = y_orig.loc[R+'1':R+'4227',:].loc[R+'1',:'F'+str(horizon)]
         df = pd.read_csv(os.path.join('data', 'Daily-train.csv'), header=0, index_col=0)
-        y_model_1= pd.read_csv(os.path.join('predictions','Daily', 'Submission_fc_230827_1351_Daily.csv'), header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
+        
+        # y_path 
+        y_path = glob.glob(os.path.join('predictions','Daily','Submission_fc_*Daily.csv'))
+        y_path = "".join(y_path)
+        
+        y_model_1= pd.read_csv(y_path, header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
         y_freq_true = pd.read_csv(os.path.join('data', 'Daily-test.csv'), header=0).iloc[:,1:]
         y_freq_true= mapName(y_freq_true,R)
         y_freq_true = y_freq_true.loc[R+'1',:'F'+str(horizon)]
@@ -70,7 +76,12 @@ def plotCompare(R):
         horizon = 48 
         y_orig_freq = y_orig.loc[R+'1':R+'414',:].loc[R+'1',:'F'+str(horizon)]
         df = pd.read_csv(os.path.join('data', 'Hourly-train.csv'), header=0, index_col=0)
-        y_model_1= pd.read_csv(os.path.join('predictions','Hourly', 'Submission_fc_230827_1401_Hourly.csv'), header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
+        
+        # y_path 
+        y_path = glob.glob(os.path.join('predictions','Hourly','Submission_fc_*Hourly.csv'))
+        y_path = "".join(y_path)
+        
+        y_model_1= pd.read_csv(y_path, header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
         y_freq_true = pd.read_csv(os.path.join('data', 'Hourly-test.csv'), header=0).iloc[:,1:]
         y_freq_true= mapName(y_freq_true,R)
         y_freq_true = y_freq_true.loc[R+'1',:'F'+str(horizon)]
@@ -80,7 +91,10 @@ def plotCompare(R):
         horizon = 13
         df = pd.read_csv(os.path.join('data', 'Weekly-train.csv'), header=0, index_col=0)
         y_orig_freq = y_orig.loc[R+'1':R+'359',:].loc[R+'1',:'F'+str(horizon)]
-        y_model_1= pd.read_csv(os.path.join('predictions','Weekly', 'Submission_fc_230827_1401_Weekly.csv'), header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
+        y_path = glob.glob(os.path.join('predictions','Weekly','Submission_fc_*Weekly.csv'))
+        y_path = "".join(y_path)
+        
+        y_model_1= pd.read_csv(y_path, header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
         y_freq_true = pd.read_csv(os.path.join('data', 'Weekly-test.csv'), header=0).iloc[:,1:]
         y_freq_true= mapName(y_freq_true,R)
         y_freq_true = y_freq_true.loc[R+'1',:'F'+str(horizon)]
@@ -91,7 +105,11 @@ def plotCompare(R):
         horizon = 18
         y_orig_freq = y_orig.loc[R+'1':R+'48000',:].loc[R+'1',:'F'+str(horizon)]
         df = pd.read_csv(os.path.join('data', 'Monthly-train.csv'), header=0, index_col=0)
-        y_model_1= pd.read_csv(os.path.join('predictions','Monthly', 'Submission_fc_230827_1359_Monthly.csv'), header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
+        
+        y_path = glob.glob(os.path.join('predictions','Monthly','Submission_fc_*Monthly.csv'))
+        y_path = "".join(y_path)        
+        
+        y_model_1= pd.read_csv(y_path, header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
         y_freq_true = pd.read_csv(os.path.join('data', 'Monthly-test.csv'), header=0).iloc[:,1:]
         y_freq_true= mapName(y_freq_true,R)
         y_freq_true = y_freq_true.loc[R+'1',:'F'+str(horizon)]
@@ -102,7 +120,11 @@ def plotCompare(R):
         horizon = 8
         df = pd.read_csv(os.path.join('data', 'Quarterly-train.csv'), header=0, index_col=0)
         y_orig_freq = y_orig.loc[R+'1':R+'24000',:].loc[R+'1',:'F'+str(horizon)]
-        y_model_1= pd.read_csv(os.path.join('predictions','Quarterly', 'Submission_fc_230827_1400_Quarterly.csv'), header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
+        
+        y_path = glob.glob(os.path.join('predictions','Quarterly','Submission_fc_*Quarterly.csv'))
+        y_path = "".join(y_path)        
+        
+        y_model_1= pd.read_csv(y_path, header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
         y_freq_true = pd.read_csv(os.path.join('data', 'Quarterly-test.csv'), header=0).iloc[:,1:]
         y_freq_true= mapName(y_freq_true,R)
         y_freq_true = y_freq_true.loc[R+'1',:'F'+str(horizon)]
@@ -113,7 +135,11 @@ def plotCompare(R):
         horizon = 6
         df = pd.read_csv(os.path.join('data', 'Yearly-train.csv'), header=0, index_col=0)
         y_orig_freq = y_orig.loc[R+'1':R+'23000',:].loc[R+'1',:'F'+str(horizon)]
-        y_model_1= pd.read_csv(os.path.join('predictions','Yearly', 'Submission_fc_230827_1403_Yearly.csv'), header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
+        
+        y_path = glob.glob(os.path.join('predictions','Yearly','Submission_fc_*Yearly.csv'))
+        y_path = "".join(y_path)
+        
+        y_model_1= pd.read_csv(y_path, header=0, index_col=0).loc[R+'1',:'F'+str(horizon)]
         y_freq_true = pd.read_csv(os.path.join('data', 'Yearly-test.csv'), header=0).iloc[:,1:]
         y_freq_true= mapName(y_freq_true,R)
         y_freq_true = y_freq_true.loc[R+'1',:'F'+str(horizon)]
